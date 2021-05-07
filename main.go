@@ -4,7 +4,7 @@ import "fmt"
 import "github.com/gin-gonic/gin"
 import "net/http"
 
-func main() {
+func setupRouter() *gin.Engine {
 	router := gin.Default()
 
 	router.GET("/ping", func(c *gin.Context) {
@@ -21,7 +21,12 @@ func main() {
             "message": message,
         })
 	})
+    return router
+}
 
+
+func main() {
+	router := setupRouter()
     router.Run(":8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
