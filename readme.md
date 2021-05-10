@@ -5,7 +5,13 @@
 ## Quick Start
 
 ```
-go mod init github.butler.edu/go-test
 go get -u github.com/gin-gonic/gin
 go run .
+```
+
+## docker
+
+```
+docker build -t npartenh/go-gin-api:1.0.0 .
+docker run npartenh/go-gin-api:1.0.0 -d
 ```
