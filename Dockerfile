@@ -1,5 +1,5 @@
 # builder image
-FROM golang:1.16.4-buster as builder
+FROM golang:1.22-bookworm as builder
 RUN mkdir /build
 COPY *.go /build/
 COPY go.* /build/
@@ -15,5 +15,3 @@ COPY --from=builder /build/server .
 
 # executable
 ENTRYPOINT [ "./server" ]
-# arguments that can be overridden
-# CMD [ "3", "300" ]
