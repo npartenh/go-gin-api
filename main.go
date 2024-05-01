@@ -8,11 +8,27 @@ import (
 	"github.com/google/uuid"
 )
 
+func Cookier(id string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Get cookie if it exists
+		if _, err := c.Cookie("cookie"); err == nil {
+			c.Next()
+		} else {
+			// set a cookie
+			// -1 ttl for session cookie
+			c.SetCookie("cookie", id, -1, "/", "127.0.0.1", false, true)
+			c.Next()
+		}
+		return
+	}
+}
+
 func setupRouter() *gin.Engine {
 	id := uuid.New().String()
 	fmt.Println(id)
 
 	router := gin.Default()
+	router.Use(Cookier(id))
 
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
