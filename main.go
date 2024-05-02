@@ -16,7 +16,7 @@ func Cookier(id string) gin.HandlerFunc {
 		} else {
 			// set a cookie
 			// -1 ttl for session cookie
-			c.SetCookie("cookie", id, -1, "/", "127.0.0.1", false, true)
+			c.SetCookie("cookie", id, -1, "", "", false, true)
 			c.Next()
 		}
 		return
