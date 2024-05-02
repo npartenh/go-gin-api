@@ -11,12 +11,13 @@ import (
 func Cookier(id string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Get cookie if it exists
-		if _, err := c.Cookie("GOAPI"); err == nil {
+		if _, err := c.Cookie("wordpress_test_cookie"); err == nil {
 			c.Next()
 		} else {
 			// set a cookie
 			// -1 ttl for session cookie
-			c.SetCookie("GOAPI", id, 300, "/", "", false, true)
+			sessionId := uuid.New().String()
+			c.SetCookie("wordpress_test_cookie", sessionId, 300, "/", "", false, true)
 			c.Next()
 		}
 		return
